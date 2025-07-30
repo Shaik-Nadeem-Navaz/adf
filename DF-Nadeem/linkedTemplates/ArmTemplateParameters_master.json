@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DF-Nadeem"
+		},
+		"Lnk_AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"Lnk_AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"Lnk_SqlServer_password": {
+			"value": ""
+		},
+		"Lnk_AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://nadeemadls.dfs.core.windows.net/"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "nadeemserver.database.windows.net"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "adminnadeem"
+		},
+		"Lnk_SqlServer_properties_typeProperties_server": {
+			"value": "DESKTOP-0BSKK4P"
+		},
+		"Lnk_SqlServer_properties_typeProperties_database": {
+			"value": "datarise"
+		},
+		"Lnk_SqlServer_properties_typeProperties_userName": {
+			"value": "DESKTOP-0BSKK4P\\HP"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
