@@ -1,0 +1,17 @@
+{
+	"name": "ds_Drop_Audit_selfsql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "pipeline_log"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

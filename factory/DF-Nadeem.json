@@ -1,0 +1,9 @@
+{
+	"name": "DF-Nadeem",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6d356907-4800-4726-ab9b-e24157a10317",
+		"tenantId": "a7446044-1613-4a4d-91c9-53e086756063"
+	}
+}

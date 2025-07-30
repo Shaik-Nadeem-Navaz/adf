@@ -1,0 +1,24 @@
+{
+	"name": "ds_DropOnlyCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "HumanResources/OnlyCSV",
+				"fileSystem": "adventure-works"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

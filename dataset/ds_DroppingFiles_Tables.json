@@ -1,0 +1,31 @@
+{
+	"name": "ds_DroppingFiles_Tables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TableNames": {
+				"type": "string"
+			},
+			"TableSchema": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().TableSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableNames",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

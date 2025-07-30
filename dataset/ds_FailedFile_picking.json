@@ -1,0 +1,33 @@
+{
+	"name": "ds_FailedFile_picking",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FailedFileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FailedFileName",
+					"type": "Expression"
+				},
+				"folderPath": "Purchasing",
+				"fileSystem": "adventure-works"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

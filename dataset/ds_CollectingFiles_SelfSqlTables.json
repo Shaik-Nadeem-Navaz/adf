@@ -1,0 +1,33 @@
+{
+	"name": "ds_CollectingFiles_SelfSqlTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FilesNames": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FilesNames",
+					"type": "Expression"
+				},
+				"folderPath": "Self Production Output",
+				"fileSystem": "adventure-works"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
