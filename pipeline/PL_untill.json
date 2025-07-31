@@ -5,7 +5,14 @@
 			{
 				"name": "Until1",
 				"type": "Until",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
@@ -86,7 +93,7 @@
 							}
 						}
 					],
-					"timeout": "0.00:01:00"
+					"timeout": "0.00:02:00"
 				}
 			},
 			{
@@ -147,6 +154,20 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "x",
+					"value": false
+				}
 			}
 		],
 		"variables": {
