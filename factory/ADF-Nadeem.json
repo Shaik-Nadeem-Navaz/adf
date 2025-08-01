@@ -1,0 +1,9 @@
+{
+	"name": "ADF-Nadeem",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "81188999-be39-44ff-a942-d0c8ed579942",
+		"tenantId": "578a50d8-8516-451f-8b84-7e5d1a29b353"
+	}
+}
