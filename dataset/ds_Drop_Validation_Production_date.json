@@ -1,0 +1,28 @@
+{
+	"name": "ds_Drop_Validation_Production_date",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LNK_adls",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileNames": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileNames",
+					"type": "Expression"
+				},
+				"folderPath": "Validation_Production/Output",
+				"fileSystem": "maincontainer"
+			}
+		},
+		"schema": {}
+	}
+}
