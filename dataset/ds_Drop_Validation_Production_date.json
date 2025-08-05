@@ -19,7 +19,7 @@
 					"value": "@dataset().FileNames",
 					"type": "Expression"
 				},
-				"folderPath": "Validation_Production/Output",
+				"folderPath": "Validation_Production",
 				"fileSystem": "maincontainer"
 			}
 		},
