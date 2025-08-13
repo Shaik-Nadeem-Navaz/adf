@@ -40,29 +40,6 @@
 				}
 			},
 			{
-				"name": "Filter1",
-				"type": "Filter",
-				"dependsOn": [
-					{
-						"activity": "Get Metadata1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
-						"type": "Expression"
-					},
-					"condition": {
-						"value": "@endswith(item().name, '.csv')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "Validation1",
 				"type": "Validation",
 				"dependsOn": [],
@@ -81,7 +58,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Filter1",
+						"activity": "Get Metadata1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -90,7 +67,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Filter1').output.value",
+						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
 					},
 					"activities": [
@@ -182,7 +159,7 @@
 								"storedProcedureParameters": {
 									"CopiedDate": {
 										"value": {
-											"value": "@formatDateTime(utcNow(), 'dd-MM-yyyy HH:mm:ss')\n",
+											"value": "@formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss')\n\n",
 											"type": "Expression"
 										},
 										"type": "DateTime"
@@ -216,6 +193,33 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Stored procedure2",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_compare]"
+				},
+				"linkedServiceName": {
+					"referenceName": "LNK_AzureSql",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
