@@ -1,0 +1,175 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_PickingFile",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable4",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable8",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable7",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          f_CustomerID as short,",
+				"          f_FirstName as string,",
+				"          f_LastName as string,",
+				"          f_Gender as string,",
+				"          f_DateOfBirth as date,",
+				"          f_AccountOpenDate as date,",
+				"          f_MobileNumber as long,",
+				"          f_Address as string,",
+				"          f_Location as string,",
+				"          f_EmailID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          CustomerID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Gender as string,",
+				"          DateOfBirth as date,",
+				"          AccountOpenDate as date,",
+				"          MobileNumber as string,",
+				"          Address as string,",
+				"          Location as string,",
+				"          EmailID as string,",
+				"          ModifiedDate as timestamp,",
+				"          md5 as binary",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1 derive(Hash = toBinary((md5(f_MobileNumber,f_Address,f_Location,f_EmailID))),",
+				"          ModifiedDateDer = currentUTC()) ~> derivedColumn1",
+				"join1 split(!isNull(CustomerID) && Hash !=md5,",
+				"     isNull(CustomerID),",
+				"     disjoint: false) ~> split1@(Matched, UnMatched)",
+				"split1@Matched alterRow(updateIf(true())) ~> alterRow1",
+				"derivedColumn1, source2 join(f_CustomerID == CustomerID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Gender as string,",
+				"          DateOfBirth as date,",
+				"          AccountOpenDate as date,",
+				"          MobileNumber as string,",
+				"          Address as string,",
+				"          Location as string,",
+				"          EmailID as string,",
+				"          ModifiedDate as timestamp,",
+				"          md5 as binary",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['ModifiedDate','MobileNumber'],",
+				"     format: 'table',",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CustomerID = f_CustomerID,",
+				"          FirstName = f_FirstName,",
+				"          LastName = f_LastName,",
+				"          Gender = f_Gender,",
+				"          DateOfBirth = f_DateOfBirth,",
+				"          AccountOpenDate = f_AccountOpenDate,",
+				"          MobileNumber = f_MobileNumber,",
+				"          Address = f_Address,",
+				"          Location = f_Location,",
+				"          EmailID = f_EmailID,",
+				"          ModifiedDate = ModifiedDateDer,",
+				"          md5 = Hash",
+				"     )) ~> sink1",
+				"split1@UnMatched sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Gender as string,",
+				"          DateOfBirth as date,",
+				"          AccountOpenDate as date,",
+				"          MobileNumber as string,",
+				"          Address as string,",
+				"          Location as string,",
+				"          EmailID as string,",
+				"          ModifiedDate as timestamp,",
+				"          md5 as binary",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CustomerID = f_CustomerID,",
+				"          FirstName = f_FirstName,",
+				"          LastName = f_LastName,",
+				"          Gender = f_Gender,",
+				"          DateOfBirth = f_DateOfBirth,",
+				"          AccountOpenDate = f_AccountOpenDate,",
+				"          MobileNumber = f_MobileNumber,",
+				"          Address = f_Address,",
+				"          Location = f_Location,",
+				"          EmailID = f_EmailID,",
+				"          ModifiedDate = ModifiedDateDer,",
+				"          md5 = Hash",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}
