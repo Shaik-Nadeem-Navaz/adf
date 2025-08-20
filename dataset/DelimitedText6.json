@@ -1,0 +1,65 @@
+{
+	"name": "DelimitedText6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LNK_adls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "scd_customers.csv",
+				"folderPath": "SCD",
+				"fileSystem": "maincontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "f_CustomerID",
+				"type": "String"
+			},
+			{
+				"name": "f_FirstName",
+				"type": "String"
+			},
+			{
+				"name": "f_LastName",
+				"type": "String"
+			},
+			{
+				"name": "f_Gender",
+				"type": "String"
+			},
+			{
+				"name": "f_DateOfBirth",
+				"type": "String"
+			},
+			{
+				"name": "f_AccountOpenDate",
+				"type": "String"
+			},
+			{
+				"name": "f_MobileNumber",
+				"type": "String"
+			},
+			{
+				"name": "f_Address",
+				"type": "String"
+			},
+			{
+				"name": "f_Location",
+				"type": "String"
+			},
+			{
+				"name": "f_EmailID",
+				"type": "String"
+			}
+		]
+	}
+}

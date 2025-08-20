@@ -1,0 +1,139 @@
+{
+	"name": "dataflow3",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText6",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable12",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable13",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "AlterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          f_CustomerID as integer,",
+				"          f_FirstName as string,",
+				"          f_LastName as string,",
+				"          f_Gender as string,",
+				"          f_DateOfBirth as date,",
+				"          f_AccountOpenDate as date,",
+				"          f_MobileNumber as string,",
+				"          f_Address as string,",
+				"          f_Location as string,",
+				"          f_EmailID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          CustomerID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Gender as string,",
+				"          DateOfBirth as date,",
+				"          AccountOpenDate as date,",
+				"          MobileNumber as string,",
+				"          Address as string,",
+				"          Location as string,",
+				"          EmailID as string,",
+				"          ModifiedDate as timestamp,",
+				"          md5 as binary,",
+				"          IsActive as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1, filter1 join(f_CustomerID == CustomerID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"source2 filter(IsActive==true()) ~> filter1",
+				"join1 derive(f_HashKey = toBinary(md5(f_MobileNumber,f_Address,f_Location,f_EmailID)),",
+				"          f_ModifiedDate = currentUTC()) ~> derivedColumn1",
+				"derivedColumn1 derive(IsActiveNew = iif(!isNull(CustomerID) && f_HashKey != md5, false(), true())) ~> derivedColumn2",
+				"derivedColumn2 alterRow(insertIf(isNull(CustomerID)),",
+				"     updateIf(!IsActiveNew),",
+				"     insertIf(!isNull(CustomerID) && f_HashKey != md5)) ~> AlterRow1",
+				"AlterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerID as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Gender as string,",
+				"          DateOfBirth as date,",
+				"          AccountOpenDate as date,",
+				"          MobileNumber as string,",
+				"          Address as string,",
+				"          Location as string,",
+				"          EmailID as string,",
+				"          ModifiedDate as timestamp,",
+				"          md5 as binary,",
+				"          IsActive as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['CustomerID'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CustomerID = f_CustomerID,",
+				"          FirstName = f_FirstName,",
+				"          LastName = f_LastName,",
+				"          Gender = f_Gender,",
+				"          DateOfBirth = f_DateOfBirth,",
+				"          AccountOpenDate = f_AccountOpenDate,",
+				"          MobileNumber = f_MobileNumber,",
+				"          Address = f_Address,",
+				"          Location = f_Location,",
+				"          EmailID = f_EmailID,",
+				"          ModifiedDate = f_ModifiedDate,",
+				"          md5 = f_HashKey,",
+				"          IsActive = IsActiveNew",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
