@@ -1,0 +1,29 @@
+{
+	"name": "AzureSqlDatabase2",
+	"properties": {
+		"parameters": {
+			"DataBaseName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "nadeemthird.database.windows.net",
+			"database": "NadeemDB",
+			"encrypt": "optional",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "adminNadeem",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "adminNadeem",
+				"secretVersion": "33c0ff18b33d4b7fad380c965eeda396"
+			}
+		}
+	}
+}
