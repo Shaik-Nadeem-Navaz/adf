@@ -1,0 +1,15 @@
+{
+	"name": "AzureKeyVault3",
+	"properties": {
+		"parameters": {
+			"EncryptedPassword": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://EncryptedPasswordDiff.vault.azure.net/"
+		}
+	}
+}
