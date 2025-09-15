@@ -1,0 +1,114 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Nadeem5786-ADF"
+		},
+		"AsqlNew_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"LNK_AzureSql_password": {
+			"value": ""
+		},
+		"LNK_adls_accountKey": {
+			"value": ""
+		},
+		"Lnk_AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"Lnk_AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"Lnk_SqlServer_password": {
+			"value": ""
+		},
+		"adlsNew_accountKey": {
+			"value": ""
+		},
+		"AsqlNew_properties_typeProperties_server": {
+			"value": "nadeemthird.database.windows.net"
+		},
+		"AsqlNew_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"AsqlNew_properties_typeProperties_userName": {
+			"value": "adminNadeem"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://EncryptedPasswordN.vault.azure.net/"
+		},
+		"AzureKeyVault2_properties_typeProperties_baseUrl": {
+			"value": "https://EncryptedPasswordNEW.vault.azure.net/"
+		},
+		"AzureKeyVault3_properties_typeProperties_baseUrl": {
+			"value": "https://EncryptedPasswordDiff.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "nadeemskserver.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "adminnadeem"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"value": "nadeemthird.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"value": "adminNadeem"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_server": {
+			"value": "nadeemthird.database.windows.net"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_userName": {
+			"value": "adminNadeem"
+		},
+		"LNK_AzureSql_properties_typeProperties_server": {
+			"value": "nadeemskserver.database.windows.net"
+		},
+		"LNK_AzureSql_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"LNK_AzureSql_properties_typeProperties_userName": {
+			"value": "adminnadeem"
+		},
+		"LNK_adls_properties_typeProperties_url": {
+			"value": "https://adlsnadeem.dfs.core.windows.net/"
+		},
+		"Lnk_AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://nadeemadls.dfs.core.windows.net/"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "nadeemserver.database.windows.net"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "NadeemDB"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "adminnadeem"
+		},
+		"Lnk_SqlServer_properties_typeProperties_server": {
+			"value": "DESKTOP-0BSKK4P"
+		},
+		"Lnk_SqlServer_properties_typeProperties_database": {
+			"value": "datarise"
+		},
+		"Lnk_SqlServer_properties_typeProperties_userName": {
+			"value": "DESKTOP-0BSKK4P\\HP"
+		},
+		"adlsNew_properties_typeProperties_url": {
+			"value": "https://nadeemadlsgen2.dfs.core.windows.net/"
+		}
+	}
+}

@@ -1,0 +1,467 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Nadeem5786-ADF"
+		},
+		"AsqlNew_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AsqlNew'"
+		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"LNK_AzureSql_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LNK_AzureSql'"
+		},
+		"LNK_adls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LNK_adls'"
+		},
+		"Lnk_AzureDataLakeStorage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Lnk_AzureDataLakeStorage'"
+		},
+		"Lnk_AzureSqlDatabase_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Lnk_AzureSqlDatabase'"
+		},
+		"Lnk_SqlServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Lnk_SqlServer'"
+		},
+		"adlsNew_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adlsNew'"
+		},
+		"AsqlNew_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "nadeemthird.database.windows.net"
+		},
+		"AsqlNew_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NadeemDB"
+		},
+		"AsqlNew_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminNadeem"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://EncryptedPasswordN.vault.azure.net/"
+		},
+		"AzureKeyVault2_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://EncryptedPasswordNEW.vault.azure.net/"
+		},
+		"AzureKeyVault3_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://EncryptedPasswordDiff.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "nadeemskserver.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NadeemDB"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminnadeem"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "nadeemthird.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NadeemDB"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminNadeem"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "nadeemthird.database.windows.net"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NadeemDB"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminNadeem"
+		},
+		"LNK_AzureSql_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "nadeemskserver.database.windows.net"
+		},
+		"LNK_AzureSql_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NadeemDB"
+		},
+		"LNK_AzureSql_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminnadeem"
+		},
+		"LNK_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsnadeem.dfs.core.windows.net/"
+		},
+		"Lnk_AzureDataLakeStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://nadeemadls.dfs.core.windows.net/"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "nadeemserver.database.windows.net"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NadeemDB"
+		},
+		"Lnk_AzureSqlDatabase_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminnadeem"
+		},
+		"Lnk_SqlServer_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-0BSKK4P"
+		},
+		"Lnk_SqlServer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "datarise"
+		},
+		"Lnk_SqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-0BSKK4P\\HP"
+		},
+		"adlsNew_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://nadeemadlsgen2.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AsqlNew_password": {
+						"value": "[parameters('AsqlNew_password')]"
+					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"LNK_AzureSql_password": {
+						"value": "[parameters('LNK_AzureSql_password')]"
+					},
+					"LNK_adls_accountKey": {
+						"value": "[parameters('LNK_adls_accountKey')]"
+					},
+					"Lnk_AzureDataLakeStorage_accountKey": {
+						"value": "[parameters('Lnk_AzureDataLakeStorage_accountKey')]"
+					},
+					"Lnk_AzureSqlDatabase_password": {
+						"value": "[parameters('Lnk_AzureSqlDatabase_password')]"
+					},
+					"adlsNew_accountKey": {
+						"value": "[parameters('adlsNew_accountKey')]"
+					},
+					"AsqlNew_properties_typeProperties_server": {
+						"value": "[parameters('AsqlNew_properties_typeProperties_server')]"
+					},
+					"AsqlNew_properties_typeProperties_database": {
+						"value": "[parameters('AsqlNew_properties_typeProperties_database')]"
+					},
+					"AsqlNew_properties_typeProperties_userName": {
+						"value": "[parameters('AsqlNew_properties_typeProperties_userName')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"AzureKeyVault2_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault2_properties_typeProperties_baseUrl')]"
+					},
+					"AzureKeyVault3_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault3_properties_typeProperties_baseUrl')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"LNK_AzureSql_properties_typeProperties_server": {
+						"value": "[parameters('LNK_AzureSql_properties_typeProperties_server')]"
+					},
+					"LNK_AzureSql_properties_typeProperties_database": {
+						"value": "[parameters('LNK_AzureSql_properties_typeProperties_database')]"
+					},
+					"LNK_AzureSql_properties_typeProperties_userName": {
+						"value": "[parameters('LNK_AzureSql_properties_typeProperties_userName')]"
+					},
+					"LNK_adls_properties_typeProperties_url": {
+						"value": "[parameters('LNK_adls_properties_typeProperties_url')]"
+					},
+					"Lnk_AzureDataLakeStorage_properties_typeProperties_url": {
+						"value": "[parameters('Lnk_AzureDataLakeStorage_properties_typeProperties_url')]"
+					},
+					"Lnk_AzureSqlDatabase_properties_typeProperties_server": {
+						"value": "[parameters('Lnk_AzureSqlDatabase_properties_typeProperties_server')]"
+					},
+					"Lnk_AzureSqlDatabase_properties_typeProperties_database": {
+						"value": "[parameters('Lnk_AzureSqlDatabase_properties_typeProperties_database')]"
+					},
+					"Lnk_AzureSqlDatabase_properties_typeProperties_userName": {
+						"value": "[parameters('Lnk_AzureSqlDatabase_properties_typeProperties_userName')]"
+					},
+					"adlsNew_properties_typeProperties_url": {
+						"value": "[parameters('adlsNew_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_4')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_6",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_6.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Lnk_SqlServer_password": {
+						"value": "[parameters('Lnk_SqlServer_password')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase3_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase3_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase3_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase3_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase3_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase3_properties_typeProperties_userName')]"
+					},
+					"Lnk_SqlServer_properties_typeProperties_server": {
+						"value": "[parameters('Lnk_SqlServer_properties_typeProperties_server')]"
+					},
+					"Lnk_SqlServer_properties_typeProperties_database": {
+						"value": "[parameters('Lnk_SqlServer_properties_typeProperties_database')]"
+					},
+					"Lnk_SqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('Lnk_SqlServer_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_6')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_8",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_8.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_7')]"
+			]
+		},
+		{
+			"name": "Nadeem5786-ADF_ArmTemplate_9",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_9.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Nadeem5786-ADF_ArmTemplate_8')]"
+			]
+		}
+	]
+}
