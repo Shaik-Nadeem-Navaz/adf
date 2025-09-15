@@ -45,6 +45,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -231,7 +232,10 @@
 								"storedProcedureName": "[dbo].[sp_InsertauditPipelineLog]",
 								"storedProcedureParameters": {
 									"DataFactory_Name": {
-										"value": "@{pipeline().DataFactory}",
+										"value": {
+											"value": "@{pipeline().DataFactory}",
+											"type": "Expression"
+										},
 										"type": "String"
 									},
 									"Pipeline_Name": {
@@ -306,19 +310,31 @@
 								"storedProcedureName": "[dbo].[usp_InsertPipelineLogRowsRead]",
 								"storedProcedureParameters": {
 									"CopiedDate": {
-										"value": "@formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss')",
+										"value": {
+											"value": "@formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss')",
+											"type": "Expression"
+										},
 										"type": "DateTime"
 									},
 									"RowsCopied": {
-										"value": "@activity('Copy data1').output.rowsCopied",
+										"value": {
+											"value": "@activity('Copy data1').output.rowsCopied",
+											"type": "Expression"
+										},
 										"type": "String"
 									},
 									"RowsRead": {
-										"value": "@activity('Copy data1').output.rowsRead",
+										"value": {
+											"value": "@activity('Copy data1').output.rowsRead",
+											"type": "Expression"
+										},
 										"type": "Int32"
 									},
 									"TableName": {
-										"value": "@substring(item().name, 0, lastIndexOf(item().name, '.'))",
+										"value": {
+											"value": "@substring(item().name, 0, lastIndexOf(item().name, '.'))",
+											"type": "Expression"
+										},
 										"type": "String"
 									}
 								}
