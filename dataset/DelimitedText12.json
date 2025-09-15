@@ -1,19 +1,33 @@
 {
-	"name": "dsLookingForExcelSummaryFile",
+	"name": "DelimitedText12",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adlsNew",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "End2EndSummaryFile.csv",
 				"folderPath": "SummaryFile",
 				"fileSystem": "e2e"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "FileName",
+				"type": "String"
+			},
+			{
+				"name": "RecordCount",
+				"type": "String"
 			}
-		}
+		]
 	}
 }
