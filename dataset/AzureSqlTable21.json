@@ -1,0 +1,41 @@
+{
+	"name": "AzureSqlTable21",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AsqlNew",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TableName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SourceFilesCount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TargetFileAuditAsRecCount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LoadDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "compareRecon"
+		}
+	}
+}

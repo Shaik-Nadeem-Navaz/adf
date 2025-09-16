@@ -455,6 +455,67 @@
 					"referenceName": "AsqlNew",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-24.eastus2.logic.azure.com:443/workflows/3e916f1a9ab24b92a0d7aeafd6d994ce/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=uy-S-s8hxgsCfZshuo__76T7l4H7RohdUm2v2gfZtjo",
+					"body": {
+						"value": "@json(concat('{ \n   \"DF-Name\": \"', pipeline().DataFactory, '\", \n   \"PL-Name\": \"', pipeline().Pipeline, '\", \n   \"lookupResult\": ', string(activity('Lookup1').output), '}'))\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select distinct TableName as FileName, SourceFilesCount as RowsInSource, TargetFileAuditAsRecCount as RowsInTarget, Status, CAST(LoadDate AS DATE) as LoadDate\nfrom CompareRecon WHERE CAST(LoadDate AS DATE) = CAST(GETDATE() AS DATE);",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable21",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
 			}
 		],
 		"annotations": []
